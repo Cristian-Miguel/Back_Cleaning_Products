@@ -2,10 +2,10 @@
   "name": "back_system",
   "version": "0.0.1",
   "description": "back of cleaning products",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "author": "Cristian Miguel",
   "license": "ISC",
@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "config": "^3.3.9",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-validator": "^6.14.3",
     "mysql": "^2.18.1"
   }
 }
