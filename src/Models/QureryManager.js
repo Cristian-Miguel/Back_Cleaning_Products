@@ -16,8 +16,8 @@ async function List_Information ( SP ) {
 
 async function Manipulate_Data ( SP ) {
     try {
-        const query = await conection.query( SP )
-        return query
+        await conection.query( SP )``
+        return 200
     } catch ( error ) {
         return 501
     }

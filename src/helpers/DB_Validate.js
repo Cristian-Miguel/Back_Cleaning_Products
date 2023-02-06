@@ -1,19 +1,37 @@
-const { check_Role } = require( '../Models/Rol' )
-const { check_Payroll } = require( '../Models/PayRoll' )
+const { check_Validate } = require( '../Models/Get_Validate' )
 
-const isValidRole = async ( Role = '' ) => {
-    let inDB = await check_Role( Role )
-    if( !inDB )
-        throw new Error('Rol not found in the DB')
+const Exist_Role = async ( Role = '' ) => {
+    if( Role == '' ) throw new Error('Insert Rol')
+    else if( 
+        !await check_Validate(
+            'SP_GET_EXIST_ROL' ,
+            `( ${Role} );`
+        )
+    ) throw new Error('Rol not found in the DB')
 } 
 
-const isValidPayroll = async ( Payroll_Number = '' ) => {
-    let inDB = await check_Payroll( Payroll_Number )
-    if( !inDB )
-        throw new Error('Payroll not found in the DB')
-} 
+const Exist_Payroll = async ( Payroll_Number = '' ) => {
+    if( Payroll_Number == '' ) throw new Error('Insert Payroll Number')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_PAYROLL' ,
+            `( ${Payroll_Number} );`
+        )
+    ) throw new Error('Payroll not found in the DB')
+}
+
+const Exist_Email = async( Email = '' ) => {
+    if( Email == '' ) throw new Error('Insert Email')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_EMAIL' ,
+            `( "${Email}" );`,
+        )
+    ) throw new Error('Email not found in the DB')
+}
 
 module.exports = {
-    isValidRole,
-    isValidPayroll,
+    Exist_Role,
+    Exist_Payroll,
+    Exist_Email
 }

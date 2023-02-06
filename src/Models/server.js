@@ -25,6 +25,7 @@ class Server {
     }
 
     routes () {
+        this.app.use( '/Auth', require( '../Routes/Auth_Routes' ) )
         this.app.use( '/User', require( '../Routes/User_Routes' ) )
         this.app.use( '/Sell', require( '../Routes/Sell_Products_Routes' ) )
     }
