@@ -10,25 +10,22 @@ const isAdmin = ( res = response, req = request, next ) => {
 const accessRol = ( ...AllRoles ) => {
     return async ( req = request, res = response, next ) => {
         try {
+            const token = req.header('secret')
             const secret = server_config.get('security.secretprivatekey')
-            const { uid }  = jwt.verify( token, secret )
-            const User = req.body.User
-            const Exist = await QueryManager.List_Information( `CALL SP_GET_EXIST_EMAIL( "${User}" );` )//check if the user exist
+            const { uid, Email }  = jwt.verify( token, secret )
+            const Exist = await QueryManager.List_Information( `CALL SP_GET_EXIST_EMAIL( "${Email}" );` )//check if the user exist
             if( Exist[0][0].inTable == 1 ) {
-                const Info = await QueryManager.List_Information( `CALL SP_GET_LOGIN_USER_INFO( "${User}" );` ) //check if id it's the same
+                const Info = await QueryManager.List_Information( `CALL SP_GET_LOGIN_USER_INFO( "${Email}" );` ) //check if id it's the same
                 if( Info[0][0].idUsuarios != uid ) {
                     return res.status(401).json({
                         msg: 'User denied'
                     })
                 } else {
-                    let i = 0 
-                    while ( i < AllRoles.length ) {
-                        if (Info[0][0].idRol != AllRoles[i]) {
-                            return res.status(401).json({
-                                msg: 'Role user denied'
-                            })  
-                        }
-                        i++
+                    const found = AllRoles.find(rols => rols == Info[0][0].idRol)
+                    if( found == undefined ){
+                        return res.status(401).json({
+                            msg: 'Role user denied'
+                        })  
                     }
                 }
             } else {

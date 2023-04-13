@@ -1,18 +1,34 @@
 const { response, request } = require( 'express' )//it's redundant
 const QueryManager = require( '../Models/QureryManager' )
 
-const SellGet = ( req = request, res = response ) => { 
-
-    res.json({
-        data: res.params,
-        msg: 'hello world'
-    })
+const SellGet = async ( req, res = response ) => { 
+    const SP = `CALL SP_GET_LIST_SELL();`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501){
+        return res.status(200).json({
+            data: list[0],
+            msg: 'Sucessful Request',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
 }
 
-const SellPost = ( req = request, res = response ) => { 
-    res.json({
-        msg: 'hello world'
-    })
+const SellPost = async ( req, res = response ) => { 
+    const SP = `CALL SP_INSERT_SELL(${req.body})`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501){
+        return res.status(200).json({
+            data: list[0],
+            msg: 'Sucessful Request',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
 }
 
 const SellDelete = ( req = request, res = response ) => {

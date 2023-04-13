@@ -30,8 +30,30 @@ const Exist_Email = async( Email = '' ) => {
     ) throw new Error('Email not found in the DB')
 }
 
+const Exist_Bill = async( Bill = '' ) => {
+    if( Bill == '' ) throw new Error('Insert customer bill')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_CUSTOMER_BILL' ,
+            `( "${Bill}" );`,
+        )
+    ) throw new Error('Customer bill client not found in the DB')
+}
+
+const Exist_Code_Product = async( Code_Product = '' ) => {
+    if( Code_Product == '' ) throw new Error('Insert Code Product')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_CODE_PRODUCT' ,
+            `( "${Code_Product}" );`,
+        )
+    ) throw new Error('Code Product not found in the DB')
+}
+
 module.exports = {
     Exist_Role,
     Exist_Payroll,
-    Exist_Email
+    Exist_Email,
+    Exist_Bill,
+    Exist_Code_Product
 }

@@ -11,7 +11,7 @@ const UserList = async ( req, res = response ) => {
         })
     } else {
         res.status(501).json({
-            error: 'Error en el servidor'
+            error: 'Error in the server'
         })
     }
 }

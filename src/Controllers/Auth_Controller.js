@@ -9,7 +9,7 @@ const UserLogin = async ( req = request, res = response ) => {
         if( isUser[0][0].isValid == 1 ){
         const SP_INFO = `CALL SP_GET_LOGIN_USER_INFO( "${req.body.Email}" );`
         const Info = await QueryManager.List_Information( SP_INFO )
-        const token = await get_JWT(Info[0][0].idUsuarios)
+        const token = await get_JWT(Info[0][0].idUsuarios, req.body.Email)
             return res.status(200).json({
                 token: token,
                 Email: Info[0][0].Email,
