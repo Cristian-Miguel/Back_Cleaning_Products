@@ -19,7 +19,7 @@ async function Manipulate_Data ( SP ) {
         await conection.query( SP )``
         return 200
     } catch ( error ) {
-        return 501
+        return error
     }
 }
 

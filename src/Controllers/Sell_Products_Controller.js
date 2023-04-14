@@ -16,12 +16,12 @@ const SellGet = async ( req, res = response ) => {
     }
 }
 
-const SellPost = async ( req, res = response ) => { 
-    const SP = `CALL SP_INSERT_SELL(${req.body})`
+const SellPost = async ( req = request, res = response ) => {
+    let body = JSON.stringify(req.body);
+    const SP = `CALL SP_INSERT_SELL('${body}')`
     const list = await QueryManager.List_Information( SP )
     if(list != 501){
         return res.status(200).json({
-            data: list[0],
             msg: 'Sucessful Request',
         })
     } else {
