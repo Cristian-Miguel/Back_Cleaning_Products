@@ -4,7 +4,7 @@ const router = Router()
 const { SellGet, SellPost, SellDelete } = require( '../Controllers/Sell_Products_Controller' )
 const { validate_token } = require('../middlewares/Validate_JWT')
 const { accessRol } = require('../middlewares/Validate_Roles')
-const { Exist_Bill, Exist_Code_Product } = require('../helpers/DB_Validate')
+const { Exist_Bill, Exist_Code_Product, Check_Stock } = require('../helpers/DB_Validate')
 const { validate_data } = require( '../middlewares/Validate_data' )
 
 //--------- Routes ---------\\
@@ -32,11 +32,12 @@ router.post( '/insert', [
     validate_data
 ], SellPost )
 
-router.delete( '/delete/:id', [
+router.post( '/delete', [
     validate_token,
     accessRol(1,2),
     check( 'id', 'Id number required' ).not().isEmpty(),
-    check( 'id', 'Id number required' ).not().isNumeric(),
+    check( 'id', 'Id number required' ).isNumeric(),
+    check( 'id', 'Id number required' ).custom( Exist_Bill ),
     validate_data
 ], SellDelete )
 //--------- Routes ---------\\

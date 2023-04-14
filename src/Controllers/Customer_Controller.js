@@ -22,7 +22,7 @@ const CustomerInsert = async ( req = request, res = response ) => {
     const list = await QueryManager.List_Information( SP )
     if(list != 501){
         return res.status(200).json({
-            msg: 'Sucessful Request',
+            msg: 'Sucessful Insert',
         })
     } else {
         res.status(501).json({
@@ -37,7 +37,7 @@ const CustomerUpdate = async ( req = request, res = response ) => {
     const list = await QueryManager.List_Information( SP )
     if(list != 501){
         return res.status(200).json({
-            msg: 'Sucessful Request',
+            msg: 'Sucessful Update',
         })
     } else {
         res.status(501).json({
@@ -46,11 +46,18 @@ const CustomerUpdate = async ( req = request, res = response ) => {
     }
 }
 
-const CustomerDelete = ( req = request, res = response ) => {
-    const id = req.params.id
-    res.json({
-        msg: 'hello world'
-    })
+const CustomerDelete = async ( req = request, res = response ) => {
+    const SP = `CALL SP_DELETE_CUSTOMER('${req.body.id}')`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501){
+        return res.status(200).json({
+            msg: 'Sucessful Delete',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
 }
 
 module.exports = {

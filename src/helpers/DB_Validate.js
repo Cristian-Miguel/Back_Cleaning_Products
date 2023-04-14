@@ -49,7 +49,6 @@ const Exist_Code_Product = async( Code_Product = '' ) => {
         )
     ) throw new Error('Code Product not found in the DB')
 }
-
 module.exports = {
     Exist_Role,
     Exist_Payroll,
