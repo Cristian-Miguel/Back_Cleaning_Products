@@ -49,10 +49,22 @@ const Exist_Code_Product = async( Code_Product = '' ) => {
         )
     ) throw new Error('Code Product not found in the DB')
 }
+
+const Exist_Formula = async( Id_Formula = '' ) => {
+    if( Id_Formula == '' ) throw new Error('Insert id formula')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_FORMULA' ,
+            `( "${Id_Formula}" );`,
+        )
+    ) throw new Error('Id formula not found in the DB')
+}
+
 module.exports = {
     Exist_Role,
     Exist_Payroll,
     Exist_Email,
     Exist_Bill,
-    Exist_Code_Product
+    Exist_Code_Product,
+    Exist_Formula
 }
