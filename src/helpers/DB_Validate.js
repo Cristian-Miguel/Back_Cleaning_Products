@@ -8,7 +8,17 @@ const Exist_Role = async ( Role = '' ) => {
             `( ${Role} );`
         )
     ) throw new Error('Rol not found in the DB')
-} 
+}
+
+const Exist_User = async ( Id_User = '' ) => {
+    if( Role == '' ) throw new Error('Insert Id User')
+    else if( 
+        !await check_Validate(
+            'SP_GET_EXIST_USER',
+            `( ${Id_User} );`
+        )
+    ) throw new Error('Id User not found in the DB')
+}
 
 const Exist_Payroll = async ( Payroll_Number = '' ) => {
     if( Payroll_Number == '' ) throw new Error('Insert Payroll Number')
@@ -62,6 +72,7 @@ const Exist_Formula = async( Id_Formula = '' ) => {
 
 module.exports = {
     Exist_Role,
+    Exist_User,
     Exist_Payroll,
     Exist_Email,
     Exist_Bill,

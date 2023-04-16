@@ -16,20 +16,53 @@ const UserList = async ( req, res = response ) => {
     }
 }
 
-const UserCreate = ( req = request, res = response ) => {
-    const SP = `CALL SP_CREATE_USER( "${req.body}" );`
-    return res.status(200).json({
-        msg: 'User create'
-    })
+const UserCreate = async ( req = request, res = response ) => {
+    const body = JSON.stringify(req.body);
+    const SP = `CALL SP_INSERT_USER( "${body}" );`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501){
+        return res.status(200).json({
+            data: list[0],
+            msg: 'Sucessful Insert',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
 }
 
-const UserDelete = ( req = request, res = response ) => {
-    
-}
-
-const UserUpdate = ( req = request, res = response ) => {
-    
+const UserUpdate = async ( req = request, res = response ) => {
+    const body = JSON.stringify(req.body);
+    const SP = `CALL SP_UPDATE_USER( "${body}" );`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501) {
+        return res.status(200).json({
+            data: list[0],
+            msg: 'Sucessful Insert',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
 } 
+
+const UserDelete = async ( req = request, res = response ) => {
+    const id = JSON.stringify(req.body.id);
+    const SP = `CALL SP_DELETE_USER( "${id}" );`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501){
+        return res.status(200).json({
+            data: list[0],
+            msg: 'Sucessful Insert',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
+}
 
 module.exports = {
     UserList,
