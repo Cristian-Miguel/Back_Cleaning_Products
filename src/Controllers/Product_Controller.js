@@ -32,7 +32,7 @@ const ProductInsert = async ( req = request, res = response ) => {
 }
 
 const ProductUpdate = async ( req = request, res = response ) => {
-    let body = JSON.stringify(req.body);
+    const body = JSON.stringify(req.body);
     const SP = `CALL SP_UPDATE_PRODUCT('${body}')`
     const list = await QueryManager.List_Information( SP )
     if(list != 501){

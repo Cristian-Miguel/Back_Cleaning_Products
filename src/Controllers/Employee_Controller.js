@@ -1,8 +1,8 @@
 const { response, request } = require( 'express' )//it's redundant
 const QueryManager = require( '../Models/QureryManager' )
 
-const CustomerGet = async ( req, res = response ) => { 
-    const SP = `CALL SP_GET_LIST_CUSTOMER();`
+const EmployeeGet = async ( req, res = response ) => { 
+    const SP = `CALL SP_GET_LIST_EMPLOYEE();`
     const list = await QueryManager.List_Information( SP )
     if(list != 501){
         return res.status(200).json({
@@ -16,9 +16,9 @@ const CustomerGet = async ( req, res = response ) => {
     }
 }
 
-const CustomerInsert = async ( req = request, res = response ) => {
+const EmployeeInsert = async ( req = request, res = response ) => {
     const body = JSON.stringify(req.body);
-    const SP = `CALL SP_INSERT_CUSTOMER('${body}')`
+    const SP = `CALL SP_INSERT_EMPLOYEE('${body}')`
     const list = await QueryManager.List_Information( SP )
     if(list != 501){
         return res.status(200).json({
@@ -31,9 +31,9 @@ const CustomerInsert = async ( req = request, res = response ) => {
     }
 }
 
-const CustomerUpdate = async ( req = request, res = response ) => {
-    const body = JSON.stringify(req.body);
-    const SP = `CALL SP_UPDATE_CUSTOMER('${body}')`
+const EmployeeUpdate = async ( req = request, res = response ) => {
+    let body = JSON.stringify(req.body);
+    const SP = `CALL SP_UPDATE_EMPLOYEE('${body}')`
     const list = await QueryManager.List_Information( SP )
     if(list != 501){
         return res.status(200).json({
@@ -46,8 +46,8 @@ const CustomerUpdate = async ( req = request, res = response ) => {
     }
 }
 
-const CustomerDelete = async ( req = request, res = response ) => {
-    const SP = `CALL SP_DELETE_CUSTOMER('${req.body.id}')`
+const EmployeeDelete = async ( req = request, res = response ) => {
+    const SP = `CALL SP_DELETE_EMPLOYEE('${req.body.id}')`
     const list = await QueryManager.List_Information( SP )
     if(list != 501){
         return res.status(200).json({
@@ -61,8 +61,8 @@ const CustomerDelete = async ( req = request, res = response ) => {
 }
 
 module.exports = {
-    CustomerGet,
-    CustomerInsert,
-    CustomerUpdate,
-    CustomerDelete
+    EmployeeGet,
+    EmployeeInsert,
+    EmployeeUpdate,
+    EmployeeDelete
 }

@@ -47,7 +47,7 @@ router.post('/update', [
     check( 'Role', 'Role  required' ).isNumeric(),
     check( 'Role' ).custom( Exist_Role ),
     validate_data
-], User_Controller.UserDelete)
+], User_Controller.UserUpdate)
 
 router.post('/delete', [
     validate_token,
