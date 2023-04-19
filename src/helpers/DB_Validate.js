@@ -70,6 +70,16 @@ const Exist_Formula = async( Id_Formula = '' ) => {
     ) throw new Error('Id formula not found in the DB')
 }
 
+const Exist_Lot = async( Id_Lot = '' ) => {
+    if( Id_Lot == '' ) throw new Error('Insert id lot')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_LOT' ,
+            `( "${Id_Lot}" );`,
+        )
+    ) throw new Error('Id lot not found in the DB')
+}
+
 module.exports = {
     Exist_Role,
     Exist_User,
@@ -77,5 +87,6 @@ module.exports = {
     Exist_Email,
     Exist_Bill,
     Exist_Code_Product,
-    Exist_Formula
+    Exist_Formula,
+    Exist_Lot
 }

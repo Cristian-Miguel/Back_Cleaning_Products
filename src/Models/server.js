@@ -30,6 +30,8 @@ class Server {
         this.app.use( '/Sell', require( '../Routes/Sell_Products_Routes' ) )
         this.app.use( '/Customer',  require( '../Routes/Customer_Routes' ) )
         this.app.use( '/Product',  require( '../Routes/Products_Routes' ) )
+        this.app.use( '/Employee',  require( '../Routes/Employee_Routes' ) )
+        this.app.use( '/Inventory',  require( '../Routes/Inventory_Routes' ) )
     }
 
     listen () {
