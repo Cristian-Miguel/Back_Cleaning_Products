@@ -80,6 +80,16 @@ const Exist_Lot = async( Id_Lot = '' ) => {
     ) throw new Error('Id lot not found in the DB')
 }
 
+const Exist_Supplier = async( Id_Supplier = '' ) => {
+    if( Id_Supplier == '' ) throw new Error('Insert id supplier')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_SUPPLIER' ,
+            `( "${Id_Supplier}" );`,
+        )
+    ) throw new Error('Id supplier not found in the DB')
+}
+
 module.exports = {
     Exist_Role,
     Exist_User,
@@ -88,5 +98,6 @@ module.exports = {
     Exist_Bill,
     Exist_Code_Product,
     Exist_Formula,
-    Exist_Lot
+    Exist_Lot,
+    Exist_Supplier
 }
