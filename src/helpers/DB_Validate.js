@@ -100,6 +100,16 @@ const Exist_Raw_Material = async( Id_Raw_Material = '' ) => {
     ) throw new Error('Id raw material not found in the DB')
 }
 
+const Exist_Purchase = async( Id_Purchase = '' ) => {
+    if( Id_Purchase == '' ) throw new Error('Insert id purchase')
+    else if(
+        !await check_Validate(
+            'SP_GET_EXIST_PURCHASE' ,
+            `( "${Id_Purchase}" );`,
+        )
+    ) throw new Error('Id purchase not found in the DB')
+}
+
 module.exports = {
     Exist_Role,
     Exist_User,
@@ -110,5 +120,6 @@ module.exports = {
     Exist_Formula,
     Exist_Lot,
     Exist_Supplier,
-    Exist_Raw_Material
+    Exist_Raw_Material,
+    Exist_Purchase
 }
