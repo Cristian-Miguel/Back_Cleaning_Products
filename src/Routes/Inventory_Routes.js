@@ -53,3 +53,5 @@ router.post( '/delete', [
     check( 'id', 'Id number required' ).custom( Exist_Lot ),
     validate_data
 ], InventoryDelete )
+
+module.exports = router

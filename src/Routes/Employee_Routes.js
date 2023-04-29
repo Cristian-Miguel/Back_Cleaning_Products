@@ -93,3 +93,5 @@ router.post( '/delete', [
     check( 'id', 'Id number required' ).custom( Exist_Payroll ),
     validate_data
 ], EmployeeDelete )
+
+module.exports = router

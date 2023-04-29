@@ -77,3 +77,5 @@ router.post( '/delete', [
     check( 'id', 'Id number required' ).custom( Exist_Supplier ),
     validate_data
 ], SupplierDelete )
+
+module.exports = router

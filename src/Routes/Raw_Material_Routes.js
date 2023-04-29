@@ -1,7 +1,7 @@
 const { Router } = require( 'express' )
 const { check } = require( 'express-validator' )
 const router = Router()
-const { MaterialGet, MaterialInsert, MaterialUpdate, MaterialDelete } = require( '../Controllers/Purchases_Controller' )
+const { MaterialGet, MaterialInsert, MaterialUpdate, MaterialDelete } = require( '../Controllers/Raw_Material_Controller' )
 const { validate_token } = require('../middlewares/Validate_JWT')
 const { accessRol } = require('../middlewares/Validate_Roles')
 const { Exist_Raw_Material } = require('../helpers/DB_Validate')
@@ -53,3 +53,5 @@ router.post( '/delete', [
     check( 'id', 'Id number required' ).custom( Exist_Raw_Material ),
     validate_data
 ], MaterialDelete )
+
+module.exports = router
