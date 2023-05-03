@@ -11,7 +11,7 @@ const Exist_Role = async ( Role = '' ) => {
 }
 
 const Exist_User = async ( Id_User = '' ) => {
-    if( Role == '' ) throw new Error('Insert Id User')
+    if( Id_User == '' ) throw new Error('Insert Id User')
     else if( 
         !await check_Validate(
             'SP_GET_EXIST_USER',
@@ -121,5 +121,5 @@ module.exports = {
     Exist_Lot,
     Exist_Supplier,
     Exist_Raw_Material,
-    Exist_Purchase
+    Exist_Purchase,
 }
