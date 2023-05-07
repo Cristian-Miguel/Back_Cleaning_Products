@@ -47,6 +47,12 @@ router.post( '/update', [
     validate_data
 ], FormulaUpdate )
 
+router.post( '/delete', [
+    validate_token,
+    accessRol(1),
+    validate_data
+], FormulaDelete )
+
 //--------- Routes ---------\\
 
 module.exports = router
