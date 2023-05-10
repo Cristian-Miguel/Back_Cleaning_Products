@@ -16,6 +16,21 @@ const FormulaGet = async ( request = req, res = response ) => {
     }
 }
 
+const FormulaInsert = async ( req = request, res = response ) => {
+    const body = JSON.stringify(req.body);
+    const SP = `CALL SP_INSERT_FORMULA('${body}')`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501){
+        return res.status(200).json({
+            msg: 'Sucessful Insert',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
+}
+
 module.exports = {
     FormulaGet,
     FormulaInsert,
