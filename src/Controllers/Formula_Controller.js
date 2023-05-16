@@ -46,6 +46,20 @@ const FormulaUpdate = async ( req = request, res = response ) => {
     }
 }
 
+const FormulaDelete = async ( req = request, res = response ) => {
+    const SP = `CALL SP_DELETE_FORMULA('${req.body.id}')`
+    const list = await QueryManager.List_Information( SP )
+    if(list != 501){
+        return res.status(200).json({
+            msg: 'Sucessful Delete',
+        })
+    } else {
+        res.status(501).json({
+            error: 'Error in the server'
+        })
+    }
+}
+
 module.exports = {
     FormulaGet,
     FormulaInsert,
